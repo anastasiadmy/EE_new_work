@@ -466,15 +466,7 @@
                 <select name="ak_stenosis" id="ak_stenosis">
                     <option value="ak_stenosis_0">--</option>
                     <option value="ak_stenosis_yes">так</option>
-                </select>
-            </td><td colspan="ak_2">
-                2/3-cт:
-                <select name="ak">
-                    <option value="ak_cuspid">--</option>
-                    <option value="ak_tricuspid">тристулковий</option>
-                    <option value="ak_bicuspid">двостулковий</option>
-                </select>
-            </td>
+                </select>            
             <td colspan="ak_2">
                 Стулки:
                 <select name="ak">
@@ -485,7 +477,15 @@
             </td>
         </tr>
     </table>
-
+</td>
+<td colspan="ak_2">
+    2/3-cт:
+    <select name="ak">
+        <option value="ak_cuspid">--</option>
+        <option value="ak_tricuspid">тристулковий</option>
+        <option value="ak_bicuspid">двостулковий</option>
+    </select>
+</td>
 
     <div id="calculator">
         <h2>AС (Continuity Equation)</h2>
@@ -502,9 +502,28 @@
 
         <div id="ava_result" class="result"></div>
     </div>
-
-
     <script>
+
+        function calculateAVA() {
+            const lvotDiameter = parseFloat(document.getElementById("lvot_diameter").value);
+            const lvotVti = parseFloat(document.getElementById("lvot_vti").value);
+            const avVti = parseFloat(document.getElementById("av_vti").value);
+
+            if (isNaN(lvotDiameter) || isNaN(lvotVti) || isNaN(avVti) ||
+                lvotDiameter < 0 || lvotVti < 0 || avVti < 0) {
+                document.getElementById("ava_result").textContent = "Please enter valid non-negative numbers.";
+                return;
+            }
+
+            // Calculate LVOT Area
+            const lvotArea = Math.PI * Math.pow(lvotDiameter / 2, 2);
+
+            // Calculate Aortic Valve Area (AVA) using the continuity equation
+            const ava = (lvotArea * lvotVti) / avVti;
+
+            document.getElementById("ava_result").textContent = "Aortic Valve Area: " + ava.toFixed(2) + " cm²";
+        }
+        
         function calculatePISA() {
             // ... (PISA calculation code - same as before) ...
             const radialDistance = parseFloat(document.getElementById("radial_distance").value);
@@ -529,26 +548,7 @@
             Volume Flow Rate: ${flowRate.toFixed(2)} mL/s
         `;
         }
-
-        function calculateAVA() {
-            const lvotDiameter = parseFloat(document.getElementById("lvot_diameter").value);
-            const lvotVti = parseFloat(document.getElementById("lvot_vti").value);
-            const avVti = parseFloat(document.getElementById("av_vti").value);
-
-            if (isNaN(lvotDiameter) || isNaN(lvotVti) || isNaN(avVti) ||
-                lvotDiameter < 0 || lvotVti < 0 || avVti < 0) {
-                document.getElementById("ava_result").textContent = "Please enter valid non-negative numbers.";
-                return;
-            }
-
-            // Calculate LVOT Area
-            const lvotArea = Math.PI * Math.pow(lvotDiameter / 2, 2);
-
-            // Calculate Aortic Valve Area (AVA) using the continuity equation
-            const ava = (lvotArea * lvotVti) / avVti;
-
-            document.getElementById("ava_result").textContent = "Aortic Valve Area: " + ava.toFixed(2) + " cm²";
-        }
+        
     </script>
 
 
