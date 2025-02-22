@@ -761,6 +761,37 @@
 <label for="perikard">Перикард:</label>
 <input type="text" class="highlighted" id="perikard" name="perikard"><br>
 
+
+  <style>
+  /* CSS for hiding/showing the image */
+  #segmentsImage {
+    display: none; /* Initially hidden */
+  }
+</style>
+</head>
+<body>
+
+<select id="imageSelector">
+  <option value="hide_segments">Hide Segments</option> 
+  <option value="show_segments">Сегменти</option>
+</select>
+
+<img id="segmentsImage" src="your_image.png" alt="Segments Diagram"> 
+
+<script>
+  // JavaScript to handle the dropdown change
+  const selector = document.getElementById('imageSelector');
+  const image = document.getElementById('segmentsImage');
+
+  selector.addEventListener('change', function() {
+    if (selector.value === 'show_segments') {
+      image.style.display = 'block'; // Show the image
+    } else {
+      image.style.display = 'none'; // Hide the image
+    }
+  });
+</script>
+
         <script>
                 function toggleRegurgitationInputs() {
                     const tRegSelect = document.getElementById("t_reg");
