@@ -294,21 +294,21 @@
         </tr>
         </table>
 
-    <div class="grid-item">
-                    <div style="display: flex; gap: 10px;">
-                        <div>
-                            <label for="basal">Basal+mid (mm):</label>
-                            <input type="number" class="highlighted" id="basal" name="basal">
-                        </div>
-                        <div>
-                            <label for="pp">ΠΠ:</label>
-                            <input type="number" class="highlighted" id="pp" name="pp">
-                        </div>
-                    </div>
-    </div>
-
     <div class="calculator">
-        <h2>LAVI</h2>
+        <h2>A4C</h2>
+        <div class="grid-item">
+            <div style="display: flex; gap: 10px;">
+                <div>
+                    <label for="basal">Basal+mid (mm):</label>
+                    <input type="number" class="highlighted" id="basal" name="basal">
+                </div>
+                <div>
+                    <label for="pp">ΠΠ:</label>
+                    <input type="number" class="highlighted" id="pp" name="pp">
+                </div>
+            </div>
+        </div>    
+        
         <label for="laVolume">LA Volume (ml):</label>
         <input type="number" id="laVolume" oninput="calculateLAVI()">
         <div class="result" id="laviResult">LAVI: </div>
@@ -489,8 +489,7 @@
     </body>
 
     <h2>АК</h2>
-    <label for="ak">ak:</label>
-    <input type="text" class="highlighted" id="ak" name="ak"><br>
+    
     <label for="ak">Макс град і швидкість</label>
     <input type="text" class="highlighted" id="ak" name="ak"><br>
 
