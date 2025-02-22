@@ -778,6 +778,15 @@
 
 <img id="segmentsImage" src="your_image.png" alt="Segments Diagram"> 
 
+<style>
+  #segmentsImage {
+    display: none;
+    max-width: 100%; /* Make image responsive */
+    height: auto;
+    display: block; /* added display block to fix a potential issue*/
+  }
+</style>
+
 <script>
   // JavaScript to handle the dropdown change
   const selector = document.getElementById('imageSelector');
