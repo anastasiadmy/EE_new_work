@@ -265,7 +265,7 @@
     <table class="calculator"> 
         <tr>  
             <td>       Стулки:
-                <select multiple name="type[ak]" >
+                <select name="ak" >
                     <option value="ak_0">--</option>
                     <option value="ak_2">фіброз</option>
                     <option value="ak_3">кальциноз</option>
@@ -277,8 +277,10 @@
                 <option value="ak_cuspid">--</option>
                 <option value="ak_tricuspid">тристулковий</option>
                 <option value="ak_bicuspid">двостулковий</option>
+                <option value="ak_bicuspid">не візуалізується</option>
                 </select>
             </td>
+            <label><input type="checkbox" data-value="недостатність"> недостатність</label>
         </tr>
     </table>
             
@@ -553,26 +555,9 @@
                     <option value="ak_stenosis_no">--</option>
                     <option value="ak_stenosis_yes">так</option>
                 </select>            
-            <td colspan="ak_2">
-                Стулки:
-                <select name="ak">
-                    <option value="ak_0">--</option>
-                    <option value="ak_2">фіброз</option>
-                    <option value="ak_3">кальциноз</option>
-                </select>
-            </td>
         </tr>
     </table>
 </td>
-<td colspan="ak_2">
-    2/3-cт:
-    <select name="ak">
-        <option value="ak_cuspid">--</option>
-        <option value="ak_tricuspid">тристулковий</option>
-        <option value="ak_bicuspid">двостулковий</option>
-    </select>
-</td>
-
 
     <div id="ak_stenosisInputs" class="hiden_calc" style="display: none;">
         <h2>AC (Continuity Equation)</h2>
