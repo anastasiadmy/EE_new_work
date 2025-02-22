@@ -125,10 +125,16 @@
 
     <div class="calculator">
         <h2>BSA Calculator</h2>
-        <label for="height">Height (cm):</label>
-        <input type="number" id="height" oninput="calculateBSA()">
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" oninput="calculateBSA()">
+        <div style="display: flex; gap: 10px;">
+            <div>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" oninput="calculateBSA()">
+            </div>
+            <div>
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" oninput="calculateBSA()">
+            </div>
+        </div>
         <div class="result" id="bsaResult">BSA: </div>
     </div>
 
@@ -141,9 +147,7 @@
             oninput="calculateLVMass(); document.getElementById('lvedd_teich').value = this.value; calculateTeichholz();">
         <label for="pw">PWd (mm):</label>
         <input type="number" id="pw" oninput="calculateLVMass()">
-        <div class="result" id="lvMassResult">LV Mass: </div>
-        <div class="result" id="lvmiResult">LVMI: </div>
-        <div class="result" id="rwtResult">RWT: </div>
+        <div class="result">LV Mass: <span id="lvMassResult"></span>, LVMI: <span id="lvmiResult"></span>, RWT: <span id="rwtResult"></span></div>
     </div>
 
 
@@ -231,7 +235,7 @@
             document.getElementById("edv_teich").textContent = edv.toFixed(2);
             document.getElementById("esv_teich").textContent = esv.toFixed(2);
             document.getElementById("sv_teich").textContent = sv.toFixed(2);
-            document.getElementById("ef_teich").textContent = ef.toFixed(2);
+            document.getElementById("ef_teich").textContent = ef.toFixed(2) + " %";
         }
     </script>
 
@@ -336,8 +340,8 @@
             const sv = edv - esv;
 
 
-            document.getElementById("ef_simpson_result").textContent = ef.toFixed(2);
-            document.getElementById("sv_simpson_result").textContent = sv.toFixed(2);
+            document.getElementById("ef_simpson_result").textContent = ef.toFixed(2) + " %";
+            document.getElementById("sv_simpson_result").textContent = sv.toFixed(2) + " ml";
         }
     </script>
 
