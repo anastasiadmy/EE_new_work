@@ -119,7 +119,7 @@
 
 <body>
 
-    <h1>Echocardiography Calculators</h1>
+    <h1>Echocardiography</h1>
     <label for="patient_name">Patient Name:</label>
     <input type="text" id="patient_name" name="patient_name" required><br><br>
 
@@ -208,10 +208,7 @@
     <label for="lvesd_teich">LVESD (mm):</label>
     <input type="number" id="lvesd_teich" oninput="calculateTeichholz()">
 
-    <div class="result">EDV: <span id="edv_teich"></span></div>
-    <div class="result">ESV: <span id="esv_teich"></span></div>
-    <div class="result">SV: <span id="sv_teich"></span></div>
-    <div class="result">EF: <span id="ef_teich"></span></div>
+    <div class="result">КДО: <span id="edv_teich"></span>, КСО: <span id="esv_teich"></span>, УО: <span id="sv_teich"></span>, ФВ: <span id="ef_teich"></span></div>
 
     <script>
         function calculateTeichholz() {
@@ -242,7 +239,7 @@
         <h2>Aorta</h2>
         <div style="display: flex; gap: 10px;">
             <div>
-            <label for="lvot_anulus">LVOT/Anulus (mm):</label>
+            <label for="lvot_anulus">LVOT:</label>
             <input type="number" class="highlighted" id="lvot_anulus" name="lvot_anulus">
             </div>
             <div>
@@ -295,12 +292,16 @@
         </table>
 
     <div class="grid-item">
-                    <label for="basal">Basal+mid (mm):</label>
-                    <input type="number" class="highlighted" id="basal" name="basal"><br>
-                    <label for="pp">ΠΠ:</label>
-                    <input type="number" class="highlighted" id="pp" name="pp"><br>
-                    <label for="e_a">E/A:</label>
-                    <input type="text" class="highlighted" id="e_a" name="e_a"><br>
+                    <div style="display: flex; gap: 10px;">
+                        <div>
+                            <label for="basal">Basal+mid (mm):</label>
+                            <input type="number" class="highlighted" id="basal" name="basal">
+                        </div>
+                        <div>
+                            <label for="pp">ΠΠ:</label>
+                            <input type="number" class="highlighted" id="pp" name="pp">
+                        </div>
+                    </div>
     </div>
 
     <div class="calculator">
@@ -317,7 +318,7 @@
         <input type="number" id="edv_simpson" oninput="calculateSimpsonEF()">
         <label for="esv_simpson">ESV:</label>
         <input type="number" id="esv_simpson" oninput="calculateSimpsonEF()">
-        <div class="result">EF: <span id="ef_simpson_result"></span></div>
+        <div class="result">EF: <span id="ef_simpson_result"></span> УО: <span id="sv_simpson_result"></span></div>
 
     </div>
     <script>
@@ -328,10 +329,15 @@
             if (isNaN(edv) || isNaN(esv) || edv <= 0 || esv <= 0) {
                 document.getElementById("ef_simpson_result").textContent = ""; // Clear if inputs are invalid
                 return; // Stop calculation if inputs are invalid
+                document.getElementById("sv_simpson_result").textContent = "";
             }
 
             const ef = ((edv - esv) / edv) * 100;
+            const sv = edv - esv;
+
+
             document.getElementById("ef_simpson_result").textContent = ef.toFixed(2);
+            document.getElementById("sv_simpson_result").textContent = sv.toFixed(2);
         }
     </script>
 
@@ -347,6 +353,10 @@
 
     <body>
 
+    <div>
+        <label for="e_a">E/A:</label>
+        <input type="text" class="highlighted" id="e_a" name="e_a"><br>
+    </div>
         <h2>MK</h2>
         <input type="text" id="mk" name="mk"><br>
 
@@ -510,8 +520,8 @@
 </td>
             <td colspan="ak_2">
                 Стеноз:
-                <select name="ak_stenosis" id="ak_stenosis">
-                    <option value="ak_stenosis_0">--</option>
+                <select name="ak_stenosis" id="stenosisSelect">
+                    <option value="ak_stenosis_no">--</option>
                     <option value="ak_stenosis_yes">так</option>
                 </select>            
             <td colspan="ak_2">
@@ -534,21 +544,34 @@
     </select>
 </td>
 
-    <div id="calculator">
-        <h2>AС (Continuity Equation)</h2>
-        <label for="lvot_diameter">LVOT Diameter (cm):</label>
+
+    <div id="ak_stenosisInputs" class="hiden_calc" style="display: none;">
+        <h2>AC (Continuity Equation)</h2>
+        <label for="lvot_diameter">LVOT Diameter (cm): </label>
         <input type="number" id="lvot_diameter" step="0.1">
-
-        <label for="lvot_vti">LVOT VTI (PW) (cm):</label>
+        
+        <label for="lvot_vti">LVOT VTI (PW) (cm): </label>
         <input type="number" id="lvot_vti" step="0.1">
-
-        <label for="av_vti">Aortic Valve VTI (CW) (cm):</label>
+        
+        <label for="av_vti">Aortic Valve VTI (CW) (cm): </label>
         <input type="number" id="av_vti" step="0.1">
-
+        
         <button onclick="calculateAVA()">Calculate</button>
-
-        <div id="ava_result" class="result"></div>
     </div>
+    
+    <div id="ava_result" class="result"></div>
+
+      <script>
+        document.getElementById('stenosisSelect').addEventListener('change', function() {
+          const stenosisInputs = document.getElementById('ak_stenosisInputs');
+          if (this.value === 'ak_stenosis_yes') {
+            stenosisInputs.style.display = 'block';
+          } else {
+            stenosisInputs.style.display = 'none';
+          }
+        });
+      </script>
+
     <script>
 
         function calculateAVA() {
