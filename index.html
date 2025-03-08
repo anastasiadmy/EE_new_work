@@ -115,6 +115,7 @@
             display: none;
         }
     </style>
+    </style>
 </head>
 
 <body>
@@ -138,17 +139,40 @@
     </div>
 
     <div class="calculator">
+        <div style="display: flex; gap: 10px;">
+            <div>
+            <label for="ivs">IVS (mm):</label>
+            <input type="number" id="ivs" oninput="calculateLVMass()">
+            </div>
+            <div>
+            <label for="lvedd">LVEDD (mm):</label>
+            <input type="number" id="lvedd"
+                oninput="calculateLVMass(); document.getElementById('lvedd_teich').value = this.value; calculateTeichholz();">
+            </div>
+
+            <div>
+            <label for="pw">PWd (mm):</label>
+            <input type="number" id="pw" oninput="calculateLVMass()">
+             </div>
+        </div>
+            <div class="result"> <span id="lvMassResult"></span> <span id="lvmiResult"></span> <span id="rwtResult"></span></div>
         
-        <label for="ivs">IVS (mm):</label>
-        <input type="number" id="ivs" oninput="calculateLVMass()">
-        <label for="lvedd">LVEDD (mm):</label>
-        <input type="number" id="lvedd"
-            oninput="calculateLVMass(); document.getElementById('lvedd_teich').value = this.value; calculateTeichholz();">
-        <label for="pw">PWd (mm):</label>
-        <input type="number" id="pw" oninput="calculateLVMass()">
-        <div class="result"> <span id="lvMassResult"></span> <span id="lvmiResult"></span> <span id="rwtResult"></span></div>
     </div>
 
+    <div class="calculator">
+         <div style="display: flex; gap: 10px;">
+            <div>
+            <label for="lvedd_teich">LVEDD (mm):</label>
+            <input type="number" id="lvedd_teich" oninput="calculateTeichholz()">
+            </div>
+            <div>
+            <label for="lvesd_teich">LVESD (mm):</label>
+            <input type="number" id="lvesd_teich" oninput="calculateTeichholz()">
+            </div>
+        </div>
+
+    <div class="result">КДО: <span id="edv_teich"></span>, КСО: <span id="esv_teich"></span>, УО: <span id="sv_teich"></span>, ФВ: <span id="ef_teich"></span></div>
+    </div>
 
     <script>
         function calculateBSA() {
@@ -203,17 +227,7 @@
             document.getElementById("rwtResult").textContent = "RWT: " + rwt.toFixed(2);
         }
 
-    </script>
-<div class="calculator">
-    <label for="lvedd_teich">LVEDD (mm):</label>
-    <input type="number" id="lvedd_teich" oninput="calculateTeichholz()">
 
-    <label for="lvesd_teich">LVESD (mm):</label>
-    <input type="number" id="lvesd_teich" oninput="calculateTeichholz()">
-
-    <div class="result">КДО: <span id="edv_teich"></span>, КСО: <span id="esv_teich"></span>, УО: <span id="sv_teich"></span>, ФВ: <span id="ef_teich"></span></div>
-</div>
-    <script>
         function calculateTeichholz() {
             const lvedd = parseFloat(document.getElementById("lvedd_teich").value);
             const lvesd = parseFloat(document.getElementById("lvesd_teich").value);
@@ -336,21 +350,31 @@
                     <label for="pp">ΠΠ:</label>
                     <input type="number" class="highlighted" id="pp" name="pp">
                 </div>
+                <div>
+                    <label for="laVolume">LA Volume (ml):</label>
+                    <input type="number" id="laVolume" oninput="calculateLAVI()">    
+                </div>
             </div>
-        </div>    
+            <div class="result" id="laviResult">LAVI: </div>
+        </div>  
         
-        <label for="laVolume">LA Volume (ml):</label>
-        <input type="number" id="laVolume" oninput="calculateLAVI()">
-        <div class="result" id="laviResult">LAVI: </div>
     </div>
 
     <div class="calculator">
-        <label for="ef_simpson">EF Simpson (%):</label>
-        <input type="number" id="ef_simpson" name="ef_simpson"><br>
-        <label for="edv_simpson">EDV:</label>
-        <input type="number" id="edv_simpson" oninput="calculateSimpsonEF()">
-        <label for="esv_simpson">ESV:</label>
-        <input type="number" id="esv_simpson" oninput="calculateSimpsonEF()">
+        <div style="display: flex; gap: 10px;">
+            <div>
+                <label for="ef_simpson">EF Simpson (%):</label>
+                <input type="number" id="ef_simpson" name="ef_simpson"><br>
+            </div>    
+            <div>
+                <label for="edv_simpson">EDV:</label>
+                <input type="number" id="edv_simpson" oninput="calculateSimpsonEF()">
+            </div>
+            <div>
+                <label for="esv_simpson">ESV:</label>
+                <input type="number" id="esv_simpson" oninput="calculateSimpsonEF()">
+            </div>
+        </div>
         <div class="result">EF: <span id="ef_simpson_result"></span> УО: <span id="sv_simpson_result"></span></div>
 
     </div>
@@ -837,8 +861,6 @@
         </script>
 
 
-
-    </body>
 
 </body>
 
